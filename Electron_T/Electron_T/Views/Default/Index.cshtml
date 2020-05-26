@@ -1,0 +1,262 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/lib/reveal.js-3.9.2/css/reveal.css" />
+    <link rel="stylesheet" href="~/lib/reveal.js-3.9.2/css/theme/white.css" />
+    <link rel="stylesheet" href="~/lib/Semantic-UI-CSS-master/semantic.min.css" />
+    <link rel="stylesheet" href="~/lib/materialize-v1.0.0/materialize/css/materialize.min.css" />
+    <link rel="stylesheet" href="~/lib/fontawesome-free-5.13.0-web/css/all.min.css" />
+    <link rel="stylesheet" href="~/lib/fontawesome-free-5.13.0-web/css/fontawesome.min.css" />
+    <link rel="stylesheet" href="~/lib/datatable/css/datatables.css" />
+    <link rel="stylesheet" href="~/lib/datatable/css/responsive.bootstrap.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
+
+
+
+
+</head>
+<body>
+    <ul id="slide-out" class="sidenav">
+        
+        <li><a href="#!">Fussballturnier</a></li>
+        <li><div class="divider"></div></li>
+        <li><a class="">Erstellt von:</a></li>
+        <li><a class="waves-effect" href="#!">Ramon Reinhardt</a></li>
+    </ul>
+
+
+    <div class="white" style="width: 100% ; top: 0; left:0; height: 50px; padding: 0.3rem; padding-right:0.5rem; padding-left:0.5rem;">
+        <a href="#" data-target="slide-out" class=" btn-floating btn waves-effect grey lighten-4 red-text z-depth-0 sidenav-trigger hov" style="position: absolute;"><i class="fas fa-bars fa"></i></a>
+
+        <div class="d-flex justify-content-end">
+            <a class="btn-floating btn waves-effect red waves-effect grey lighten-4 modal-trigger red-text z-depth-0 a" href="#modal1"><i class="fas fa-plus fa"></i></a>
+        </div>
+    </div>
+
+
+
+    <div class="content" style="margin-top: 0.5rem; margin-left: 2rem; margin-right: 2rem;">
+
+        <!--<a id="test" class="waves-effect waves-light btn red darken-4 white-text">Testen</a>-->        
+
+        <div id="select-content"></div>
+        <div id="table-content"></div>
+
+        <div class="d-flex justify-content-center">
+            <a id="async-msg" class="waves-effect waves-light btn red darken-4 white-text">Simulieren</a>
+        </div>
+
+    </div>
+
+
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal bottom-sheet" style="height: 200px;">
+        <div class="modal-content">
+            <h4>Verein Hinzufügen</h4>
+            <div class="d-flex">
+                <div class="input-field col s6">
+                    <input id="inputVerein" type="text" class="validate">
+                    <label for="last_name">Name des Vereins</label>
+                </div>
+                <div class="d-flex align-items-center">
+                    <a class="modal-close waves-effect waves-light btn" id="btnInsert">Hinzufügen</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="derLoader"
+         style="width: 100%; height: 100%; position: fixed ; z-index:1000; top: 0; left: 0; background-color: white; display: flex; justify-content: center; align-items: center;">
+
+        <div class="preloader-wrapper big active">
+            <div class="spinner-layer spinner-blue-only">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!--<button id="btnSelect">Test</button>-->
+    <!-- Modal Trigger -->
+    <!--<a class="waves-effect waves-light btn modal-trigger" href="#modal11">Modal</a>-->
+    <!-- Modal Structure -->
+    <div id="modal11" class="modal">
+        <div class="modal-content">
+            <div class="reveal" style="background-color: blanchedalmond; width: 100%; height: 80%; position: fixed ;margin-left: auto; margin-right: auto;left: 0;right: 0;">
+                <div class="slides">
+                    <section>Slide 1</section>
+                    <section>Slide 2</section>
+                    <section>Slide 1</section>
+                    <section>Slide 2</section>
+                    <section>Slide 1</section>
+                    <section>Slide 2</section>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">X</a>
+        </div>
+    </div>
+
+
+    <!-- Insert this line above script imports  -->
+    <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
+
+    <script src="~/js/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/reveal.js-3.9.2/js/reveal.js"></script>
+    <script src="~/lib/Semantic-UI-CSS-master/semantic.min.js"></script>
+    <script src="~/lib/materialize-v1.0.0/materialize/js/materialize.min.js"></script>
+    <script src="~/lib/fontawesome-free-5.13.0-web/js/all.min.js"></script>
+    <script src="~/lib/datatable/js/datatables.js"></script>
+    <script src="~/lib/datatable/js/dataTables.responsive.js"></script>
+
+
+    <!-- Insert this line after script imports -->
+    <script>if (window.module) module = window.module;</script>
+
+    <script>
+
+        const { ipcRenderer } = require("electron");
+
+        $(document).ready(function () {
+            $('.sidenav').sidenav();
+            $('.modal').modal();
+            $('.tabs').tabs();
+            //$('.tabs').tabs({ 'swipeable': true });
+            //ipcRenderer.send("getLigen", 'ping');
+
+            /*
+            Reveal.initialize({
+                center: true,
+                transition: 'linear',
+            });
+            */
+
+        });
+
+
+        $(window).on("load", function () {
+            $(".derLoader").fadeOut("slow");
+        });
+
+
+
+
+        document.getElementById("async-msg").addEventListener("click", () => {
+            ipcRenderer.send("async-msg1", 'ping');
+            $(".derLoader").fadeIn();
+            //$("#result").load("test.html");
+
+
+        });
+
+        ipcRenderer.on('asynchronous-reply', (event, arg) => {
+            const message = arg;
+            document.getElementById('table-content').innerHTML = message;
+            $(".derLoader").fadeOut();
+
+            //var table = $('#example').DataTable();
+            //table.clear();
+            
+
+            $('#example').DataTable({
+                //"scrollY": "15rem",
+                //"scrollCollapse": true,
+                responsive: true,
+                responsive: {
+                    breakpoints: [
+                        { name: 'mobile', width: 500 }
+                    ]
+                },
+
+                searching: false, paging: false, info: false, "bPaginate": false,
+                columnDefs: [
+                    { responsivePriority: 1, targets: 0 },
+                    { responsivePriority: 1, targets: 1 },
+                    { responsivePriority: 2, targets: 2 },
+                    { responsivePriority: 1, targets: 3 },
+                    { responsivePriority: 3, targets: 6 },
+                ]
+            });
+
+            $('.ui.rating').rating();
+
+            $('.ui.rating').rating({
+                onRate: function (value) {
+                    var id = $(this).attr("data-value");
+                    var ob = new Object();
+                    ob.rate = parseInt(value);
+                    ob.id = parseInt(id);
+                    ipcRenderer.send('msg-rating', ob);
+                    console.log(ob);
+                }
+            });
+        });
+
+
+        $("#btnInsert").click(function () {
+            var input = document.getElementById("inputVerein").value;
+            $(".derLoader").fadeIn();
+            ipcRenderer.send("insertMessage", input);
+            
+        });
+
+        /*
+        $(".btnDelete").click(function () {
+            var id = $(this).attr("data-value");      
+            $(".derLoader").fadeIn();
+            ipcRenderer.send('msg-delete', id);
+            //alert();
+            
+        });
+        */
+        $(document).on('click', '.btnDelete', function () {
+            var id = $(this).attr("data-value");
+            $(".derLoader").fadeIn();
+            ipcRenderer.send('msg-delete', id);
+            console.log("hi");
+        });
+
+        /*
+
+         ipcRenderer.on('setLigen', (event, arg) => {
+            const message = arg;
+            document.getElementById('select-content').innerHTML = message;
+            $('select').formSelect();
+
+        });
+
+        $("#btnSelect").click(function () {
+            ipcRenderer.send("getLigen", 'ping');
+        });
+        */
+
+
+
+    </script>
+
+</body>
+</html>

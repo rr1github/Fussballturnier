@@ -1,0 +1,218 @@
+﻿<!DOCTYPE html>
+
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width" />
+  <title>Index</title>
+  <link rel="stylesheet" href="./lib/bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="./css/site.css" />
+  <link rel="stylesheet" href="./lib/reveal.js-3.9.2/css/reveal.css" />
+  <link rel="stylesheet" href="./lib/reveal.js-3.9.2/css/theme/white.css" />
+  <link rel="stylesheet" href="./lib/materialize-v1.0.0/materialize/css/materialize.min.css" />
+  <link rel="stylesheet" href="./lib/fontawesome-free-5.13.0-web/css/all.min.css" />
+  <link rel="stylesheet" href="./lib/fontawesome-free-5.13.0-web/css/fontawesome.min.css" />
+  <link rel="stylesheet" href="./lib/datatable/css/datatables.css" />
+  <link rel="stylesheet" href="./lib/datatable/css/responsive.bootstrap.css" />
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="./lib/Semantic-UI-CSS-master/semantic.min.css" />
+
+
+
+</head>
+
+<body style="overflow-y: auto">
+  <ul id="slide-out" class="sidenav">
+    <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
+    <li><a href="#!">Second Link</a></li>
+    <li>
+      <div class="divider"></div>
+    </li>
+    <li><a class="subheader">Subheader</a></li>
+    <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+  </ul>
+
+
+  <div class="white"
+    style="width: 100% ; top: 0; left:0; height: 50px; padding: 0.3rem; padding-right:0.5rem; padding-left:0.5rem;">
+    <a href="#" data-target="slide-out"
+      class=" btn-floating btn waves-effect grey lighten-4 red-text z-depth-0 sidenav-trigger hov"
+      style="position: absolute;;"><i class="fas fa-bars fa"></i></a>
+
+    <div class="d-flex justify-content-end">
+      <a class="btn-floating btn waves-effect red waves-effect grey lighten-4 modal-trigger red-text z-depth-0 a"
+        href="#modal1" id="mod"><i class="fas fa-plus fa"></i></a>
+    </div>
+  </div>
+
+
+
+  <div class="container-fluid my-5">
+
+    
+    <a id="test" data-value="1" class="waves-effect waves-light btn white white-red"><i class="far fa-trash-alt"></i></a>
+
+    <a id="test" class="waves-effect waves-light btn-sm red darken-4 white-text">Test</a>
+
+    <div class="ui rating" data-rating="3" data-value="1" data-max-rating="5"></div>
+
+    <div id="select-content"></div>
+    <table id="example" class="display table table - striped" style="width: 100% "> <thead> <tr><th> Pos </th><th> Name </th><th> Spiele </th><th> Punkte </th><th> Tore </th><th> Gegentore</th><th> Differenz </th><th> Bewertung </th><th> </th></tr> </thead> <tbody><tr><td>1</td><td><div class="d-flex"> <div> <img src="http://logo.clearbit.com/github.com?size=25" > </div><div class="d-flex align-items-center ml-3 font-weight-bold">github </div> </div> </td><td>6</td><td>17</td><td>33</td><td>17</td><td>0</td><td> <div class="ui rating" data-rating="5" data-value="7" data-max-rating="5"></div></td> <td> <a data-value ="7"class="btn-sm btnDelete waves-effect red darken-3 white-text z-depth-0"><i class="far fa-trash-alt"></i></a></td></tr><tr><td>2</td><td><div class="d-flex"> <div> <img src="http://logo.clearbit.com/fcbayern.com?size=25" > </div><div class="d-flex align-items-center ml-3 font-weight-bold">Bayern München </div> </div> </td><td>6</td><td>16</td><td>44</td><td>33</td><td>10</td><td> <div class="ui rating" data-rating="0" data-value="3" data-max-rating="5"></div></td> <td> <a data-value ="3"class="btn-sm btnDelete waves-effect red darken-3 white-text z-depth-0"><i class="far fa-trash-alt"></i></a></td></tr><tr><td>3</td><td><div class="d-flex"> <div> <img src="http://logo.clearbit.com/www.bayer04.de?size=25" > </div><div class="d-flex align-items-center ml-3 font-weight-bold">Bayer Leverkusen </div> </div> </td><td>6</td><td>15</td><td>34</td><td>26</td><td>-5</td><td> <div class="ui rating" data-rating="3" data-value="6" data-max-rating="5"></div></td> <td> <a data-value ="6"class="btn-sm btnDelete waves-effect red darken-3 white-text z-depth-0"><i class="far fa-trash-alt"></i></a></td></tr><tr><td>4</td><td><div class="d-flex"> <div> <img src="http://logo.clearbit.com/schalke04.de?size=25" > </div><div class="d-flex align-items-center ml-3 font-weight-bold">Schalke 04 </div> </div> </td><td>6</td><td>9</td><td>22</td><td>29</td><td>-6</td><td> <div class="ui rating" data-rating="3" data-value="4" data-max-rating="5"></div></td> <td> <a data-value ="4"class="btn-sm btnDelete waves-effect red darken-3 white-text z-depth-0"><i class="far fa-trash-alt"></i></a></td></tr><tr><td>5</td><td><div class="d-flex"> <div> <img src="http://logo.clearbit.com/www.hsv.de?size=25" > </div><div class="d-flex align-items-center ml-3 font-weight-bold">HSV </div> </div> </td><td>6</td><td>7</td><td>26</td><td>32</td><td>-6</td><td> <div class="ui rating" data-rating="5" data-value="1" data-max-rating="5"></div></td> <td> <a data-value ="1"class="btn-sm btnDelete waves-effect red darken-3 white-text z-depth-0"><i class="far fa-trash-alt"></i></a></td></tr><tr><td>6</td><td><div class="d-flex"> <div> <img src="http://logo.clearbit.com/www.realmadrid.com?size=25" > </div><div class="d-flex align-items-center ml-3 font-weight-bold">Real Madrid </div> </div> </td><td>6</td><td>4</td><td>28</td><td>36</td><td>-1</td><td> <div class="ui rating" data-rating="3" data-value="5" data-max-rating="5"></div></td> <td> <a data-value ="5"class="btn-sm btnDelete waves-effect red darken-3 white-text z-depth-0"><i class="far fa-trash-alt"></i></a></td></tr><tr><td>7</td><td><div class="d-flex"> <div> <img src="http://logo.clearbit.com/www.werder.de?size=25" > </div><div class="d-flex align-items-center ml-3 font-weight-bold">Werder Bremen </div> </div> </td><td>6</td><td>1</td><td>18</td><td>32</td><td>-7</td><td> <div class="ui rating" data-rating="5" data-value="2" data-max-rating="5"></div></td> <td> <a data-value ="2"class="btn-sm btnDelete waves-effect red darken-3 white-text z-depth-0"><i class="far fa-trash-alt"></i></a></td></tr></tbody> </table>
+
+    <div class="d-flex justify-content-center">
+      <a id="async-msg" class="waves-effect waves-light btn red darken-4 white-text">Simulieren</a>
+    </div>
+
+  </div>
+
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal bottom-sheet" style="height: 200px;">
+    <div class="modal-content">
+      <h4>Verein Hinzufügen</h4>
+      <div class="d-flex">
+        <div class="input-field col s6">
+          <input id="inputVerein" type="text" class="validate">
+          <label for="last_name">Name des Vereins</label>
+        </div>
+        <div class="d-flex align-items-center">
+          <a class="modal-close waves-effect waves-light btn" id="btnInsert">Hinzufügen</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="derLoader"
+    style="width: 100%; height: 85%; position: sticky; top: 15%; left: 0; background-color: white; display: flex; justify-content: center; align-items: center;">
+
+    <div class="preloader-wrapper big active">
+      <div class="spinner-layer spinner-blue-only">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div>
+        <div class="gap-patch">
+          <div class="circle"></div>
+        </div>
+        <div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!--<button id="btnSelect">Test</button>-->
+  <!-- Modal Trigger -->
+  <!--<a class="waves-effect waves-light btn modal-trigger" href="#modal11">Modal</a>-->
+  <!-- Modal Structure -->
+  <div id="modal11" class="modal">
+    <div class="modal-content">
+      <div class="reveal"
+        style="background-color: blanchedalmond; width: 100%; height: 80%; position: fixed ;margin-left: auto; margin-right: auto;left: 0;right: 0;">
+        <div class="slides">
+          <section>Slide 1</section>
+          <section>Slide 2</section>
+          <section>Slide 1</section>
+          <section>Slide 2</section>
+          <section>Slide 1</section>
+          <section>Slide 2</section>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">X</a>
+    </div>
+  </div>
+
+
+
+
+  <script src="./js/jquery.js"></script>
+  <script src="./lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./lib/reveal.js-3.9.2/js/reveal.js"></script>
+  <script src="./lib/materialize-v1.0.0/materialize/js/materialize.min.js"></script>
+  <script src="./lib/fontawesome-free-5.13.0-web/js/all.min.js"></script>
+  <script src="./lib/datatable/js/datatables.js"></script>
+  <script src="./lib/datatable/js/dataTables.responsive.js"></script>
+  <script src="./lib/Semantic-UI-CSS-master/semantic.min.js"></script>
+
+
+
+  <script>
+
+
+
+    $(document).ready(function () {
+      $('.sidenav').sidenav();
+      $('.modal').modal();
+      $('.tabs').tabs();
+
+
+    });
+
+
+    $(window).on("load", function () {
+      $(".derLoader").fadeOut("slow");
+    });
+
+
+
+
+    document.getElementById("async-msg").addEventListener("click", () => {
+
+      $(".derLoader").fadeIn();
+      //$("#result").load("test.html");
+
+
+    });
+
+
+
+    $('.ui.rating').rating();
+
+    $('.ui.rating').rating({
+      onRate: function (value) {
+        var id = $(this).attr("data-value");
+        var ob = new Object();
+        ob.rate = parseInt(value);
+        ob.id = parseInt(id);
+        ipcRenderer.send('msg-rating', ob);
+        console.log(ob);
+      }
+    });
+
+
+
+    $(".btnDelete").click(function () {
+           /* var id = $(this).attr("data-value");      
+            $(".derLoader").fadeIn();
+            ipcRenderer.send('msg-delete', id); */
+            alert();
+            
+        });
+
+
+
+    $("#btnInsert").click(function () {
+
+    });
+
+
+
+
+
+    $("mod").click(function () {
+      alert();
+    });
+
+
+
+
+  </script>
+
+</body>
+
+</html>
