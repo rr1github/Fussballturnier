@@ -19,6 +19,7 @@ namespace Electron_T.Controllers
         {
 
             DatenbankZugriff db = new DatenbankZugriff();
+            //HI
 
             Electron.IpcMain.On("async-msg1", (args) =>
             {
