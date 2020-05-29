@@ -20,11 +20,8 @@
     <link rel="stylesheet" href="~/lib/datatable/css/datatables.css" />
     <link rel="stylesheet" href="~/lib/datatable/css/responsive.bootstrap.css" />
     <link rel="stylesheet" href="~/css/style.css" />
-
-
-
-
 </head>
+
 <body>
     <ul id="slide-out" class="sidenav">
         
@@ -43,19 +40,14 @@
         </div>
     </div>
 
-
-
     <div class="content" style="margin-top: 0.5rem; margin-left: 2rem; margin-right: 2rem;">
-
-        <!--<a id="test" class="waves-effect waves-light btn red darken-4 white-text">Testen</a>-->        
-
+        <!--<a id="test" class="waves-effect waves-light btn red darken-4 white-text">Testen</a>-->     
         <div id="select-content"></div>
         <div id="table-content"></div>
 
         <div class="d-flex justify-content-center">
             <a id="async-msg" class="waves-effect waves-light btn red darken-4 white-text">Simulieren</a>
         </div>
-
     </div>
 
 
@@ -73,13 +65,10 @@
                 </div>
             </div>
         </div>
-
     </div>
-
 
     <div class="derLoader"
          style="width: 100%; height: 100%; position: fixed ; z-index:1000; top: 0; left: 0; background-color: white; display: flex; justify-content: center; align-items: center;">
-
         <div class="preloader-wrapper big active">
             <div class="spinner-layer spinner-blue-only">
                 <div class="circle-clipper left">
@@ -95,32 +84,7 @@
         </div>
     </div>
 
-
-
-
-    <!--<button id="btnSelect">Test</button>-->
-    <!-- Modal Trigger -->
-    <!--<a class="waves-effect waves-light btn modal-trigger" href="#modal11">Modal</a>-->
-    <!-- Modal Structure -->
-    <div id="modal11" class="modal">
-        <div class="modal-content">
-            <div class="reveal" style="background-color: blanchedalmond; width: 100%; height: 80%; position: fixed ;margin-left: auto; margin-right: auto;left: 0;right: 0;">
-                <div class="slides">
-                    <section>Slide 1</section>
-                    <section>Slide 2</section>
-                    <section>Slide 1</section>
-                    <section>Slide 2</section>
-                    <section>Slide 1</section>
-                    <section>Slide 2</section>
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect waves-green btn-flat">X</a>
-        </div>
-    </div>
-
-
+    
     <!-- Insert this line above script imports  -->
     <script>if (typeof module === 'object') { window.module = module; module = undefined; }</script>
 
@@ -133,54 +97,34 @@
     <script src="~/lib/datatable/js/datatables.js"></script>
     <script src="~/lib/datatable/js/dataTables.responsive.js"></script>
 
-
     <!-- Insert this line after script imports -->
     <script>if (window.module) module = window.module;</script>
 
-    <script>
 
+
+    <script>
         const { ipcRenderer } = require("electron");
 
         $(document).ready(function () {
             $('.sidenav').sidenav();
             $('.modal').modal();
-            $('.tabs').tabs();
-            //$('.tabs').tabs({ 'swipeable': true });
-            //ipcRenderer.send("getLigen", 'ping');
-
-            /*
-            Reveal.initialize({
-                center: true,
-                transition: 'linear',
-            });
-            */
-
+            $('.tabs').tabs();            
         });
-
 
         $(window).on("load", function () {
             $(".derLoader").fadeOut("slow");
         });
 
-
-
-
         document.getElementById("async-msg").addEventListener("click", () => {
-            ipcRenderer.send("async-msg1", 'ping');
-            $(".derLoader").fadeIn();
-            //$("#result").load("test.html");
-
-
+            ipcRenderer.send("msg-createTable", 'ping');
+            $(".derLoader").fadeIn();            
         });
 
-        ipcRenderer.on('asynchronous-reply', (event, arg) => {
+        // Tabelle Laden
+        ipcRenderer.on('reply-createTable', (event, arg) => {
             const message = arg;
             document.getElementById('table-content').innerHTML = message;
             $(".derLoader").fadeOut();
-
-            //var table = $('#example').DataTable();
-            //table.clear();
-            
 
             $('#example').DataTable({
                 //"scrollY": "15rem",
@@ -191,7 +135,6 @@
                         { name: 'mobile', width: 500 }
                     ]
                 },
-
                 searching: false, paging: false, info: false, "bPaginate": false,
                 columnDefs: [
                     { responsivePriority: 1, targets: 0 },
@@ -216,46 +159,20 @@
             });
         });
 
-
         $("#btnInsert").click(function () {
             var input = document.getElementById("inputVerein").value;
             $(".derLoader").fadeIn();
             ipcRenderer.send("insertMessage", input);
-            
-        });
-
-        /*
-        $(".btnDelete").click(function () {
-            var id = $(this).attr("data-value");      
-            $(".derLoader").fadeIn();
-            ipcRenderer.send('msg-delete', id);
-            //alert();
-            
-        });
-        */
+            document.getElementById("inputVerein").value = "";
+        });       
+        
         $(document).on('click', '.btnDelete', function () {
             var id = $(this).attr("data-value");
             $(".derLoader").fadeIn();
             ipcRenderer.send('msg-delete', id);
             console.log("hi");
         });
-
-        /*
-
-         ipcRenderer.on('setLigen', (event, arg) => {
-            const message = arg;
-            document.getElementById('select-content').innerHTML = message;
-            $('select').formSelect();
-
-        });
-
-        $("#btnSelect").click(function () {
-            ipcRenderer.send("getLigen", 'ping');
-        });
-        */
-
-
-
+        
     </script>
 
 </body>

@@ -8,11 +8,8 @@ namespace Electron_T.Classes
 {
     public class DatenbankZugriff
     {
-
         SQLiteConnection connection;
-        List<Mannschaft> mannschaftList = new List<Mannschaft>();
-        List<Liga>ligaList = new List<Liga>();
-        //public string pfad { get; set; }
+        List<Mannschaft> mannschaftList = new List<Mannschaft>();        
 
         public DatenbankZugriff()
         {
@@ -29,8 +26,7 @@ namespace Electron_T.Classes
             SQLiteCommand command = new SQLiteCommand();
             command.Connection = connection;
             
-            string query = "SELECT * FROM mannschaft ORDER BY punkte desc, differenz desc";
-            //string query = "Select Mannschaft.name, Mannschaft.id, Mannschaft.anzahlSpiele, Mannschaft.punkte, Mannschaft.tore, Mannschaft.gegentore, Mannschaft.differenz, Tabelle.name From Mannschaft Inner Join Tabelle On Mannschaft.id = Tabelle.id_Mannschaft Where Tabelle.id = 1";
+            string query = "SELECT * FROM mannschaft ORDER BY punkte desc, differenz desc";            
 
             command.CommandText = query;
 
@@ -39,7 +35,6 @@ namespace Electron_T.Classes
             while (reader.Read())
             {
                 Mannschaft mannschaft = new Mannschaft();
-
 
                 mannschaft.id = Convert.ToInt32(reader["id"]);
                 mannschaft.name = reader["name"].ToString();
@@ -50,13 +45,10 @@ namespace Electron_T.Classes
                 mannschaft.differenz = Convert.ToInt32(reader["differenz"]);
                 mannschaft.bewertung = Convert.ToInt32(reader["bewertung"]);
 
-
                 mannschaftList.Add(mannschaft);
             }
-
             reader.Close();
             return mannschaftList;
-
         }
 
         public void Insert(string insertName)
@@ -68,35 +60,6 @@ namespace Electron_T.Classes
             command.CommandText = "INSERT INTO mannschaft (name, anzahlSpiele, punkte, tore, gegentore, differenz, bewertung) VALUES (@name ,0,0,0,0,0,3)";
             command.ExecuteNonQuery();
             command.Parameters.Clear();
-        }
-
-        public void update()
-        {
-
-        }
-
-        public List<Liga> getLigen()
-        {
-            SQLiteCommand command = new SQLiteCommand();
-            command.Connection = connection;            
-           
-            string query = "SELECT * FROM Tabelle ";
-
-            command.CommandText = query;
-
-            SQLiteDataReader reader = command.ExecuteReader();
-
-            while (reader.Read())
-            {
-                Liga liga = new Liga();
-                liga.id = Convert.ToInt32(reader["id"]);
-                liga.name = reader["name"].ToString();                
-
-                ligaList.Add(liga);
-            }
-
-            reader.Close();
-            return ligaList;
         }
 
         public void UpdateRating(string id, string rating)

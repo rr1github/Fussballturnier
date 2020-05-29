@@ -19,8 +19,7 @@ namespace Electron_T
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
-            
+            Configuration = configuration;            
         }
 
         public IConfiguration Configuration { get; }
@@ -30,14 +29,13 @@ namespace Electron_T
         {
             services.AddControllersWithViews();
 
-
             // Open the Electron-Window here
             //Task.Run(async () => await Electron.WindowManager.CreateWindowAsync());
             ElectronBootstrap();
 
             // Add framework services.  
             services.AddMvc();
-            services.Add(new ServiceDescriptor(typeof(Berichtsheft), new Berichtsheft(Configuration.GetConnectionString("DefaultConnection"))));
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -75,8 +73,7 @@ namespace Electron_T
             var browserWindow = await Electron.WindowManager.CreateWindowAsync(new BrowserWindowOptions
             {
                 Width = 1100,
-                Height = 800
-               
+                Height = 800               
             });
 
             await browserWindow.WebContents.Session.ClearCacheAsync();

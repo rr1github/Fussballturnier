@@ -8,7 +8,6 @@ using Electron_T.Classes;
 using ElectronNET.API;
 using System.Threading;
 using ElectronNET.API.Entities;
-using Newtonsoft.Json;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Electron_T.Controllers
@@ -17,45 +16,21 @@ namespace Electron_T.Controllers
     {
         public IActionResult Index()
         {
-
             DatenbankZugriff db = new DatenbankZugriff();
-            //HI
-
-            Electron.IpcMain.On("async-msg1", (args) =>
+            
+            Electron.IpcMain.On("msg-createTable", (args) =>
             {
                 List<Mannschaft> mannschaften = db.SelectAll();
-                db.ResetSimulation(mannschaften);
-                //mannschaften.Clear();
+                db.ResetSimulation(mannschaften);                
                 mannschaften = db.SelectAll();
-                /*
-                for(int i = 0; i<= mannschaften.Count-1; i++)
-                {
-                    for(int z= 0; z<= mannschaften.Count -1; z++)
-                    {
-                        if(mannschaften[i].id != mannschaften[z].id)
-                        {
-                            Spielpaarung spielpaarung = new Spielpaarung();
-                            spielpaarung.create(mannschaften[i], mannschaften[z]);
-                            Random random = new Random();
-                            spielpaarung.setTore(random.Next(0, 10), random.Next(0, 10));                            
-                            spielpaarung.setPunkte();
-                        }
-                        
-
-                    }
-                }
-
-    */
-
+               
                 for (int i = 0; i <= mannschaften.Count - 1; i++)
-                {
-                    
+                {                    
                     for (int z = i + 1; z <= mannschaften.Count - 1; z++)
                     {
                         if (mannschaften[i].id != mannschaften[z].id)
                         {
-                            Spielpaarung spielpaarung = new Spielpaarung();
-                            
+                            Spielpaarung spielpaarung = new Spielpaarung();                            
                             spielpaarung.create(mannschaften[i], mannschaften[z]);
 
                             Rating rating = new Rating();                           
@@ -72,12 +47,10 @@ namespace Electron_T.Controllers
                             int gtoreB = mannschaften[z].gegentore;
                             int difB = mannschaften[z].differenz;
                         }
-
                     }
                 }
 
-                db.UpdateSimulation(mannschaften);
-                
+                db.UpdateSimulation(mannschaften);                
 
                 Tabelle tab = new Tabelle();
                 tab.getManschaften(mannschaften);
@@ -85,29 +58,11 @@ namespace Electron_T.Controllers
                 string tabelleString = tab.getTabelle();
 
                 var mainWindow = Electron.WindowManager.BrowserWindows.First();                
-                Electron.IpcMain.Send(mainWindow, "asynchronous-reply", tabelleString);
-
-                //var browserWindowOptions = new BrowserWindowOptions { Width = 800, Height = 600 }; await Electron.WindowManager.CreateWindowAsync(browserWindowOptions);
+                Electron.IpcMain.Send(mainWindow, "reply-createTable", tabelleString);
+     
             });
 
-            Electron.IpcMain.On("getLigen", (args) =>
-            {
-                List<Liga> listLiga = db.getLigen();
-
-                string output = "<div class=\"input-field\"> <select> <option value = \"\" disabled selected>Liga</option>";
-
-                foreach (Liga liga in listLiga)
-                {
-                    output = output + "<option value = '" + liga.name + "' >" + liga.name + "</option>";
-
-                }
-                output = output + "</div>";
-                var mainWindow = Electron.WindowManager.BrowserWindows.First();
-                Electron.IpcMain.Send(mainWindow, "setLigen", output);
-
-            });
-
-
+            
             Electron.IpcMain.On("insertMessage", (args) =>
             {
                 var mainWindow = Electron.WindowManager.BrowserWindows.First();                
@@ -118,7 +73,7 @@ namespace Electron_T.Controllers
                 tab.getManschaften(mannschaften);
                 string tabelleString = tab.getTabelle();    
                 
-                Electron.IpcMain.Send(mainWindow, "asynchronous-reply", tabelleString);
+                Electron.IpcMain.Send(mainWindow, "reply-createTable", tabelleString);
             });
 
 
@@ -144,16 +99,11 @@ namespace Electron_T.Controllers
                 tab.getManschaften(mannschaften);
                 string tabelleString = tab.getTabelle();
                 var mainWindow = Electron.WindowManager.BrowserWindows.First();
-                Electron.IpcMain.Send(mainWindow, "asynchronous-reply", tabelleString);
+                Electron.IpcMain.Send(mainWindow, "reply-createTable", tabelleString);
             });
-
-            
 
             return View();
 
-
-            
-            
         }
     }
 }

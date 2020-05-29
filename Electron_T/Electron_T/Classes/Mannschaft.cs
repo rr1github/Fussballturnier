@@ -7,16 +7,6 @@ namespace Electron_T.Classes
 {
     public class Mannschaft
     {
-        /*
-       private int id;
-        private string name;
-        private int punkte;
-        private int tore;
-        private int gegentore;
-        private int anzahlSpiele;
-        private int differenz;
-        */
-
         public int id { get; set; }
         public string name { get; set; }
         public int punkte { get; set; }
@@ -26,11 +16,6 @@ namespace Electron_T.Classes
         public int differenz { get; set; }
         public int bewertung { get; set; }
 
-
-        public Mannschaft()
-        {
-            
-        }
 
         public void addPunkte(int punkte)
         {
@@ -94,7 +79,6 @@ namespace Electron_T.Classes
         {
             return name;
         }
-
 
     }
 
